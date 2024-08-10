@@ -1,0 +1,4 @@
+MONGO_URI=mongodb://localhost:27017
+JWT_SECRET=mystrongjwtsecretkey
+SESSION_SECRET=mystrongsessionsecretkey
+PORT=3000
