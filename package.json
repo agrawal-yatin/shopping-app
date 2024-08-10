@@ -4,7 +4,8 @@
   "description": "A shopping cart application",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "seed": "node seedProducts.js",
+    "start": "npm run seed && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -58,26 +58,35 @@
 
     <main class="container mt-5 pt-5">
         <h2 class="text-center mb-4">Products</h2>
-        <div class="row">
-            <% products.forEach(product=> { %>
-                <div class="col-md-4 mb-4">
-                    <div class="product-card">
-                        <img src="<%= product.image %>" alt="<%= product.name %>">
-                        <div class="product-card-body">
-                            <h5 class="card-title">
-                                <%= product.name %>
-                            </h5>
-                            <p class="card-text">Price: $<%= product.price %>
-                            </p>
-                            <form action="/cart/add" method="POST">
-                                <input type="hidden" name="productId" value="<%= product._id %>">
-                                <button type="submit" class="btn btn-primary">Add to Cart</button>
-                            </form>
+
+        <% if (products?.length> 0) { %>
+            <div class="row">
+                <% products.forEach(product=> { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="product-card">
+                            <img src="<%= product.image %>" alt="<%= product.name %>">
+                            <div class="product-card-body">
+                                <h5 class="card-title">
+                                    <%= product.name %>
+                                </h5>
+                                <p class="card-text">Price: $<%= product.price %>
+                                </p>
+                                <form action="/cart/add" method="POST">
+                                    <input type="hidden" name="productId" value="<%= product._id %>">
+                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <% }) %>
-        </div>
+                    <% }) %>
+            </div>
+            <% } else { %>
+                No products found in DB
+                <% } %>
+
+
+
+
     </main>
 
     <footer class="bg-dark text-white text-center py-3">
