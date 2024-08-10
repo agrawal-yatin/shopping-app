@@ -11,6 +11,14 @@ const cartRoutes = require("./routes/cartRoutes");
 const connectDB = require("./config/db");
 const User = require("./models/User"); // Import User model
 const Product = require("./models/Product"); // Ensure you have this model
+const crypto = require("crypto");
+
+
+// Generate a dynamic JWT secret
+process.env.JWT_SECRET = crypto.randomBytes(64).toString("hex");
+
+// Generate a dynamic session secret
+process.env.SESSION_SECRET = crypto.randomBytes(64).toString("hex");
 
 dotenv.config(); 
 
