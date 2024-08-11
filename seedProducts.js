@@ -37,10 +37,16 @@ const products = [
 // Function to add products to the database
 const seedProducts = async () => {
   try {
-    await Product.deleteMany(); // Clear existing products if needed
-    await Product.insertMany(products);
-    console.log("Dummy products added successfully");
-    mongoose.connection.close(); // Close the connection after seeding
+    const existingProducts = await Product.find(); // Check for existing products
+
+    if (existingProducts.length > 0) {
+      console.log("Products already exist. Skipping seeding.");
+    } else {
+      await Product.insertMany(products);
+      console.log("Dummy products added successfully");
+    }
+
+    mongoose.connection.close(); // Close the connection after seeding or skipping
   } catch (error) {
     console.error("Error adding products:", error.message);
     mongoose.connection.close();
