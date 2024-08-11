@@ -1,61 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products - Shopping Cart Application</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .container {
-            max-width: 1200px;
-        }
-
-        .product-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .product-card img {
-            width: 100%;
-            height: auto;
-        }
-
-        .product-card-body {
-            padding: 15px;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .nav-link {
-            color: #007bff;
-            margin-right: 15px;
-        }
-
-        .nav-link:hover {
-            color: #0056b3;
-        }
-    </style>
-</head>
-
-<body>
-    <header class="bg-dark text-white p-3 fixed-top">
-        <div class="container">
-            <h1 class="h3">Shopping Cart Application</h1>
-            <nav class="d-flex justify-content-between">
-                <a class="nav-link" href="/">Home</a>
-                <a class="nav-link" href="/cart">Cart</a>
-                <a class="btn btn-outline-light" href="/auth/logout">Logout</a>
-            </nav>
-        </div>
-    </header>
-
+    <%- include('partials/header', { showHomeLink: true, showProductsLink: false, showCartLink: true, showLoginLink: false, showRegisterLink: false, user: user }) %>
     <main class="container mt-5 pt-5">
         <h2 class="text-center mb-4">Products</h2>
 
@@ -89,13 +32,4 @@
 
     </main>
 
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 Shopping Cart Application</p>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-
-</html>
+    <%- include('partials/footer') %>

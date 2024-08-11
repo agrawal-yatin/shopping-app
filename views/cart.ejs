@@ -1,62 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cart - Shopping Cart Application</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .container {
-            max-width: 1200px;
-        }
-
-        .cart-item {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .cart-item img {
-            width: 100%;
-            height: auto;
-        }
-
-        .cart-item-form {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
-        }
-    </style>
-</head>
-
-<body>
-    <header class="bg-dark text-white p-3 fixed-top">
-        <div class="container">
-            <h1 class="h3">Shopping Cart Application</h1>
-            <nav class="d-flex justify-content-between">
-                <a class="nav-link text-light" href="/">Home</a>
-                <a class="nav-link text-light" href="/products">Products</a>
-                <a class="btn btn-outline-light" href="/auth/logout">Logout</a>
-            </nav>
-        </div>
-    </header>
+<%- include('partials/header', { showHomeLink: true, showProductsLink: true, showCartLink: false, showLoginLink: false, showRegisterLink: false, user: user }) %>
 
     <main class="container mt-5 pt-5">
         <h2 class="text-center mb-4">Your Cart</h2>
-
+    
         <% if (cart?.products?.length> 0) { %>
             <div>
                 <% cart.products.forEach(item=> { %>
@@ -68,14 +14,15 @@
                             </h5>
                             <p>Price: $<%= item.product.price %>
                             </p>
-                            <p>Quantity: <%= item.quantity %>
-                            </p>
-                            <form class="cart-item-form" action="/cart/update" method="POST">
-                                <input type="hidden" name="productId" value="<%= item.product._id %>">
-                                <input type="number" name="quantity" value="<%= item.quantity %>" min="1"
-                                    class="form-control">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </form>
+                            <div class="quantity-controls">
+                                <button class="btn btn-light" data-action="decrease"
+                                    data-id="<%= item.product._id %>">-</button>
+                                <span id="quantity-<%= item.product._id %>">
+                                    <%= item.quantity %>
+                                </span>
+                                <button class="btn btn-light" data-action="increase"
+                                    data-id="<%= item.product._id %>">+</button>
+                            </div>
                             <form class="cart-item-form remove-form" action="/cart/remove" method="POST">
                                 <input type="hidden" name="productId" value="<%= item.product._id %>">
                                 <button type="submit" class="btn btn-danger">Remove</button>
@@ -84,20 +31,55 @@
                     </div>
                     <% }) %>
             </div>
-            <h3 class="mt-4">Total: $<%= cart.products.reduce((total, item)=> total + (item.product.price *
-                    item.quantity), 0) %></h3>
+            <h3 class="mt-4">Total: $<span id="cart-total">
+                    <%= cart.products.reduce((total, item)=> total + (item.product.price * item.quantity), 0) %>
+                </span></h3>
             <% } else { %>
                 <p>No products in the cart.</p>
                 <% } %>
     </main>
+    
+    <script>
+        document.querySelectorAll('.quantity-controls button').forEach(button => {
+            button.addEventListener('click', function () {
+                const action = this.getAttribute('data-action');
+                const productId = this.getAttribute('data-id');
+                const quantitySpan = document.getElementById(`quantity-${productId}`);
+                let quantity = parseInt(quantitySpan.textContent);
 
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 Shopping Cart Application</p>
-    </footer>
+                if (action === 'increase') {
+                    quantity++;
+                } else if (action === 'decrease' && quantity > 1) {
+                    quantity--;
+                }
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                quantitySpan.textContent = quantity;
+                updateCartTotal();
+                updateCartQuantity(productId, quantity);
+            });
+        });
+
+        function updateCartTotal() {
+            let total = 0;
+            document.querySelectorAll('.cart-item').forEach(item => {
+                const price = parseFloat(item.querySelector('p').textContent.replace('Price: $', ''));
+                const quantity = parseInt(item.querySelector('.quantity-controls span').textContent);
+                total += price * quantity;
+            });
+            document.getElementById('cart-total').textContent = total.toFixed(2);
+        }
+
+        function updateCartQuantity(productId, quantity) {
+            fetch('/cart/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ productId, quantity })
+            });
+        }
+    </script>
+
     <script>
         document.querySelectorAll('.remove-form').forEach(form => {
             form.addEventListener('submit', function (event) {
@@ -108,6 +90,6 @@
             });
         });
     </script>
-</body>
 
-</html>
+    <%- include('partials/footer') %>
+    

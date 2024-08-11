@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Shopping Cart Application
+    </title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 56px;
+        }
+
+        .main-content {
+            margin-top: 20px;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="bg-dark text-white p-3 fixed-top">
+        <div class="container">
+            <h1 class="h3">Shopping Cart Application</h1>
+            <nav class="d-flex justify-content-between">
+                <% if (showHomeLink) { %>
+                    <a class="nav-link text-light" href="/">Home</a>
+                    <% } %>
+                <% if (showProductsLink) { %>
+                    <a class="nav-link text-light" href="/products">Products</a>
+                    <% } %>
+                        <% if (showCartLink) { %>
+                            <a class="nav-link text-light" href="/cart">Cart</a>
+                            <% } %>
+                                <% if (user) { %>
+                                    <a class="btn btn-outline-light" href="/auth/logout">Logout</a>
+                                    <% } else { %>
+                                        <% if (showLoginLink) { %>
+                                            <a class="btn btn-outline-light" href="/auth/login">Login</a>
+                                            <% } %>
+
+                                            <% if (showRegisterLink) { %>
+                                                <a class="btn btn-outline-light" href="/auth/register">Register</a>
+                                                <% } %>
+                                        <% } %>
+            </nav>
+        </div>
+    </header>
