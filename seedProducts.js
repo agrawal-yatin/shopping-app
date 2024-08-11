@@ -18,24 +18,20 @@ mongoose
 // Dummy products array
 const products = [
   {
-    name: "Dummy Product 1",
-    price: 29.99,
-    image: "https://via.placeholder.com/150",
-    description: "Description for Product 1",
+    "name": "Dummy Product 1",
+    "price": 29.99,
+    "image": "https://via.placeholder.com/150"
   },
   {
-    name: "Dummy Product 2",
-    price: 39.99,
-    image: "https://via.placeholder.com/150",
-    description: "Description for Product 2",
+    "name": "Dummy Product 2",
+    "price": 39.99,
+    "image": "https://via.placeholder.com/150"
   },
   {
-    name: "Dummy Product 3",
-    price: 19.99,
-    image: "https://via.placeholder.com/150",
-    description: "Description for Product 3",
-  },
-  // Add more products as needed
+    "name": "Dummy Product 3",
+    "price": 19.99,
+    "image": "https://via.placeholder.com/150"
+  }
 ];
 
 // Function to add products to the database
