@@ -9,8 +9,8 @@ exports.renderRegisterPage = (req, res) => {
 // Handle user registration
 exports.register = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.create({ username, password });
+    const { username, email, password } = req.body;
+    const user = await User.create({ username, email, password });
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });

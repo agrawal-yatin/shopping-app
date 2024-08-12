@@ -27,7 +27,7 @@
             const quantity = parseInt(item.querySelector('.quantity-controls span').textContent);
             total += price * quantity;
         });
-        document.getElementById('cart-total').textContent = total.toFixed(2);
+        document.getElementById('cart-total').textContent = ' ' + total.toFixed(2) + ' ';
     }
 
     function updateCartQuantity(productId, quantity) {
