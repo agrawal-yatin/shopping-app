@@ -1,27 +1,82 @@
 <%- include('partials/header', { showHomeLink: true, showProductsLink: true, showCartLink: true, showLoginLink: false,
     showRegisterLink: false, user: user }) %>
-    <main class="container mt-5 pt-5">
-        <h2 class="text-center mb-4">
-            <%= product.name %>
-        </h2>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
+                        src="<%= product.image %>" alt="<%= product.name %>" /></div>
+                <div class="col-md-6">
+                    <div class="small mb-1">SKU: BST-498</div>
+                    <h1 class="display-5 fw-bolder"><%= product.name %></h1>
+                    <div class="fs-5 mb-5">
+                        <span>$<%= product.price %></span>
+                    </div>
+                    <p class="lead"><%= product.description %></p>
+                    <div class="d-flex">
+                        <form action="/cart/add" method="POST">
+                            <input type="hidden" name="productId" value="<%= product._id %>">
 
-        <div class="row">
-            <div class="col-md-6">
-                <img src="<%= product.image %>" alt="<%= product.name %>" class="img-fluid">
-            </div>
-            <div class="col-md-6">
-                <p><strong>Price:</strong> $<%= product.price %>
-                </p>
-                <p><strong>Description:</strong>
-                    <%= product.description %>
-                </p>
-                <form action="/cart/add" method="POST">
-                    <input type="hidden" name="productId" value="<%= product._id %>">
-                    <button type="submit" class="btn btn-primary">Add to Cart</button>
-                </form>
+                            <button type="submit" class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <i class="bi-cart-fill me-1"></i>
+                                Add to cart
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </main>
+    </section>
+    <!-- Related items section-->
+    <section class="py-5 bg-light">
+        <div class="container px-4 px-lg-5 mt-5">
+            <h2 class="fw-bolder mb-4">Related products</h2>
+            <% if (products?.length> 0) { %>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <% products.forEach(product=> { %>
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Link to product detail page -->
+                                <a href="/products/<%= product._id %>">
+                                    <img class="card-img-top" src="<%= product.image %>" alt="<%= product.name %>"
+                                        class="product-image">
+                                </a>
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">
+                                            <a class="product-name" style="text-decoration: none !important; color: inherit !important;" href="/products/<%= product._id %>">
+                                                <%= product.name %>
+                                            </a>
+                                        </h5>
+                                        <!-- Product reviews-->
+                                        <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                        </div>
+                                        <!-- Product price-->
+                                        $<%= product.price %>
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center">
+                                        <form action="/cart/add" method="POST">
+                                            <input type="hidden" name="productId" value="<%= product._id %>">
+                                            <button type="submit" class="btn btn-outline-dark mt-auto">Add to Cart</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+                <% } %>
+        </div>
+    </section>
 
     <%- include('partials/cart-total') %>
         <%- include('partials/footer') %>

@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const cookieParser = require("cookie-parser");
@@ -31,7 +32,7 @@ connectDB();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
 // Middleware to set user based on token

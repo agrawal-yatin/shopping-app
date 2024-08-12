@@ -14,10 +14,12 @@ exports.getProducts = async (req, res) => {
 exports.getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
+    const products = await Product.find(); 
+
     if (!product) {
       return res.status(404).send("Product not found");
     }
-    res.render("product-detail", { product, user: req.session.user });
+    res.render("product-detail", { product, products, user: req.session.user });
   } catch (err) {
     res.status(500).send("Server error");
   }

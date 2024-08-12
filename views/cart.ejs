@@ -1,45 +1,113 @@
-<%- include('partials/header', { showHomeLink: true, showProductsLink: true, showCartLink: false, showLoginLink: false, showRegisterLink: false, user: user }) %>
+<%- include('partials/header', { showHomeLink: true, showProductsLink: true, showCartLink: false, showLoginLink: false,
+    showRegisterLink: false, user: user }) %>
+    <style>
+        .cart-summary {
+            border: 1px solid #cccccc;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px #cccccc;
+    height: calc(100vh - 150px);
+        }
 
-    <main class="container mt-5 pt-5">
-        <h2 class="text-center mb-4">Your Cart</h2>
-    
-        <% if (cart?.products?.length> 0) { %>
-            <div>
-                <% cart.products.forEach(item=> { %>
-                    <div class="cart-item">
-                        <img src="<%= item.product.image %>" alt="<%= item.product.name %>">
-                        <div>
-                            <h5>
-                                <%= item.product.name %>
-                            </h5>
-                            <p>Price: $<%= item.product.price %>
-                            </p>
-                            <div class="quantity-controls">
-                                <button class="btn btn-light" data-action="decrease"
-                                    data-id="<%= item.product._id %>">-</button>
-                                <span id="quantity-<%= item.product._id %>">
-                                    <%= item.quantity %>
-                                </span>
-                                <button class="btn btn-light" data-action="increase"
-                                    data-id="<%= item.product._id %>">+</button>
-                            </div>
-                            <form class="cart-item-form remove-form" action="/cart/remove" method="POST">
-                                <input type="hidden" name="productId" value="<%= item.product._id %>">
-                                <button type="submit" class="btn btn-danger">Remove</button>
-                            </form>
+        .cart-items {
+            overflow: scroll;
+    max-height: calc(100vh - 220px);
+        }
+        .mt-100 {
+            margin-top: 100px;
+        }
+    </style>
+    <section class="cart-section">
+        <main class="container px-4 px-lg-5 mt-100">
+            <div class="row cart-summary">
+                <!-- Cart Items Section -->
+                <div class="col-md-8 px-4">
+                    <h2 class="border-bottom pb-3 mb-4 mt-3">Your Cart</h2>
+
+                    <% if (cart?.products?.length> 0) { %>
+                        <div class="cart-items">
+                            <% cart.products.forEach(item=> { %>
+                                <div class="cart-item d-flex align-items-center mb-4 p-3 border rounded">
+                                        <a class="me-3" href="/products/<%= item.product._id %>">
+                                            <img src="<%= item.product.image %>" alt="<%= item.product.name %>" class="img-fluid me-3"
+                                                style="width: 120px; height: auto;">
+                                        </a>
+                                    <div class="w-100">
+                                        <div class="d-flex justify-content-between">
+                                            <h5 class="ml-2">
+                                                <a class="product-name" style="text-decoration: none !important; color: inherit !important;"
+                                                    href="/products/<%= item.product._id %>">
+                                                    <%= item.product.name %>
+                                                </a>
+                                            </h5>
+                                            <p class="mb-2">Price: $<%= item.product.price %>
+                                            </p>
+
+                                            <div class="quantity-controls">
+                                                <button class="btn btn-outline-secondary btn-sm" data-action="decrease" data-id="<%= item.product._id %>">-</button>
+                                                <span id="quantity-<%= item.product._id %>" class="mx-2">
+                                                    <%= item.quantity %>
+                                                </span>
+                                                <button class="btn btn-outline-secondary btn-sm" data-action="increase" data-id="<%= item.product._id %>">+</button>
+                                            </div>
+                                            <form class="remove-form" action="/cart/remove" method="POST">
+                                                <input type="hidden" name="productId" value="<%= item.product._id %>">
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </div>
+                        <% } else { %>
+                            <p class="text-center py-5 mt-100">No products in the cart.</p>
+                            <% } %>
+                </div>
+
+                <!-- Cart Summary Section -->
+                <div class="col-md-4 bg-light p-4 rounded">
+                    <div class="">
+                        <h4 class="border-bottom mb-3 pb-3">Cart Summary</h4>
+                        <div class="d-flex justify-content-between mb-5">
+                            <strong>ITEMS</strong>
+                            <span id="cart-count">0</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-5">
+                            <strong>CART TOTAL</strong>
+                            <% if (cart?.products?.length> 0) { %>
+                            <h5>$<span id="cart-total">
+                                    <%= (cart.products.reduce((total, item)=> total + (item.product.price * item.quantity), 0)).toFixed(2) %>
+                                </span></h5>
+                            <% } %>
+                        </div>
+                        <div class="d-flex justify-content-between mt-5">
+                            <button class="btn btn-dark w-100">
+                                <i class="bi-cart-fill me-1"></i>
+                                CHECKOUT
+                            </button>
                         </div>
                     </div>
-                    <% }) %>
+                </div>
             </div>
-            <h3 class="mt-4">Total: $<span id="cart-total">
-                    <%= cart.products.reduce((total, item)=> total + (item.product.price * item.quantity), 0) %>
-                </span></h3>
-            <% } else { %>
-                <p>No products in the cart.</p>
-                <% } %>
-    </main>
-    
-    <%- include('partials/cart-counter') %>
+        </main>
+    </section>
 
-    <%- include('partials/footer') %>
-    
+    <script>
+        const socket = new WebSocket(`ws://${window.location.host}`);
+
+        socket.addEventListener('message', function (event) {
+            const data = JSON.parse(event.data);
+            if (data.type === 'CART_UPDATE') {
+                // Update cart UI with new data
+                console.log('Cart updated:', data.cart);
+                updateCartUI(data.cart);
+            }
+        });
+
+        function updateCartUI(cart) {
+            const totalItems = cart.products.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').innerText = totalItems;
+        }
+    </script>
+
+    <%- include('partials/cart-total') %>
+        <%- include('partials/cart-counter') %>

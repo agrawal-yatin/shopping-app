@@ -1,24 +1,24 @@
-    <%- include('partials/header', { showHomeLink: false, showProductsLink: false, showCartLink: false, showLoginLink: false, showRegisterLink: true, user: user }) %>
-    <main class="container mt-5 pt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="form-container">
-                    <h2 class="text-center mb-4">Login</h2>
-                    <form action="/auth/login" method="POST">
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Username"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Login</button>
-                    </form>
+<%- include('partials/header', { showHomeLink: false, showProductsLink: false, showCartLink: false, showLoginLink:
+    false, showRegisterLink: true, user: user }) %>
+    <main class="d-flex align-items-center justify-content-center min-vh-100">
+        <div class="form-container bg-white p-4 p-md-5 rounded shadow-sm">
+            <h2 class="text-center mb-4">Login</h2>
+            <form action="/auth/login" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username"
+                        required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                        required>
+                </div>
+                <button type="submit" class="btn btn-dark btn-block w-100">Login</button>
+            </form>
         </div>
     </main>
-<%- include('partials/footer') %>
+    <%- include('partials/footer') %>
+        <style>
+            body {
+                background-color: #e2e2e2;
+            }
+        </style>
