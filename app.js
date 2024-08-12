@@ -12,6 +12,7 @@ const connectDB = require("./config/db");
 const User = require("./models/User"); // Import User model
 const Product = require("./models/Product"); // Ensure you have this model
 const crypto = require("crypto");
+const cartController = require("./controllers/cartController");
 
 
 // Generate a dynamic JWT secret
@@ -89,6 +90,9 @@ const server = app.listen(process.env.PORT || 3000, () => {
 });
 
 const wss = new Server({ server });
+
+// Set WebSocket server in CartController
+cartController.setWebSocketServer(wss);
 
 wss.on("connection", (ws) => {
   console.log("Client connected");

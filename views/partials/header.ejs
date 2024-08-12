@@ -37,7 +37,7 @@
                     <a class="nav-link text-light" href="/products">Products</a>
                     <% } %>
                         <% if (showCartLink) { %>
-                            <a class="nav-link text-light" href="/cart">Cart</a>
+                            <a class="nav-link text-light" id="cart-link" href="/cart">Cart (<span id="cart-count">0</span>)</a>
                             <% } %>
                                 <% if (user) { %>
                                     <a class="btn btn-outline-light" href="/auth/logout">Logout</a>
