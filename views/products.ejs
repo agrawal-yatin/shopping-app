@@ -7,10 +7,15 @@
                 <% products.forEach(product=> { %>
                     <div class="col-md-4 mb-4">
                         <div class="product-card">
-                            <img src="<%= product.image %>" alt="<%= product.name %>">
+                            <!-- Link to product detail page -->
+                            <a href="/products/<%= product._id %>">
+                                <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
+                            </a>
                             <div class="product-card-body">
                                 <h5 class="card-title">
-                                    <%= product.name %>
+                                    <a href="/products/<%= product._id %>">
+                                        <%= product.name %>
+                                    </a>
                                 </h5>
                                 <p class="card-text">Price: $<%= product.price %>
                                 </p>
@@ -24,7 +29,7 @@
                     <% }) %>
             </div>
             <% } else { %>
-                No products found in DB
+                <p>No products found in DB</p>
                 <% } %>
 
 

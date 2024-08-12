@@ -1,0 +1,27 @@
+<%- include('partials/header', { showHomeLink: true, showProductsLink: true, showCartLink: true, showLoginLink: false,
+    showRegisterLink: false, user: user }) %>
+    <main class="container mt-5 pt-5">
+        <h2 class="text-center mb-4">
+            <%= product.name %>
+        </h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <img src="<%= product.image %>" alt="<%= product.name %>" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <p><strong>Price:</strong> $<%= product.price %>
+                </p>
+                <p><strong>Description:</strong>
+                    <%= product.description %>
+                </p>
+                <form action="/cart/add" method="POST">
+                    <input type="hidden" name="productId" value="<%= product._id %>">
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/cart-total') %>
+        <%- include('partials/footer') %>

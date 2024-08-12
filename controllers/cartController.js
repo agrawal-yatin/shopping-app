@@ -2,7 +2,7 @@ const Cart = require("../models/Cart");
 
 let wss; // WebSocket server reference
 
-// Assign WebSocket server instance (ensure this is set in app.js or elsewhere)
+// WebSocket server instance
 exports.setWebSocketServer = (wsServer) => {
   wss = wsServer;
 };

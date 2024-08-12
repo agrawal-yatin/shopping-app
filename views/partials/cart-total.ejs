@@ -4,7 +4,7 @@
     });
 
     function fetchCartCount() {
-        fetch('/cart/count') // Create a route to get cart count
+        fetch('/cart/count')
             .then(response => response.json())
             .then(data => {
                 document.getElementById('cart-count').innerText = data.totalItems;

@@ -2,15 +2,15 @@ const express = require("express");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken"); // Make sure to import jwt
+const jwt = require("jsonwebtoken");
 const { Server } = require("ws");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const connectDB = require("./config/db");
-const User = require("./models/User"); // Import User model
-const Product = require("./models/Product"); // Ensure you have this model
+const User = require("./models/User");
+const Product = require("./models/Product");
 const crypto = require("crypto");
 const cartController = require("./controllers/cartController");
 
@@ -47,7 +47,7 @@ app.use(async (req, res, next) => {
   } else {
     req.user = null;
   }
-  res.locals.user = req.user; // Make `user` available in views
+  res.locals.user = req.user;
   next();
 });
 
@@ -69,15 +69,10 @@ app.use("/auth", authRoutes);
 app.use("/products", productRoutes);
 app.use("/cart", cartRoutes);
 
-// Home route
-// app.get("/", (req, res) => {
-//   res.render("index", { user: req.user }); // Render index.ejs and pass user object
-// });
-
 app.get("/", async (req, res) => {
   try {
-    const products = await Product.find(); // Fetch all products
-    res.render("index", { products, user: req.user }); // Pass products to view
+    const products = await Product.find();
+    res.render("index", { products, user: req.user }); 
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");

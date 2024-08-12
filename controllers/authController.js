@@ -18,8 +18,8 @@ exports.register = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
     });
-    req.session.user = user; // Store user info in session
-    res.status(201).redirect("/"); // Redirect to products page
+    req.session.user = user;
+    res.status(201).redirect("/");
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -45,8 +45,8 @@ exports.login = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
     });
-    req.session.user = user; // Store user info in session
-    res.redirect("/"); // Redirect to products page
+    req.session.user = user;
+    res.redirect("/");
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -54,10 +54,10 @@ exports.login = async (req, res) => {
 
 // Handle user logout
 exports.logout = (req, res) => {
-  res.clearCookie("token"); // Clear the token cookie
+  res.clearCookie("token");
   // Log the user out
   req.session.destroy(() => {
-    res.redirect("/"); // Redirect to home or login page
+    res.redirect("/");
   });
 };
 
