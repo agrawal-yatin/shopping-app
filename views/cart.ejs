@@ -39,57 +39,7 @@
                 <% } %>
     </main>
     
-    <script>
-        document.querySelectorAll('.quantity-controls button').forEach(button => {
-            button.addEventListener('click', function () {
-                const action = this.getAttribute('data-action');
-                const productId = this.getAttribute('data-id');
-                const quantitySpan = document.getElementById(`quantity-${productId}`);
-                let quantity = parseInt(quantitySpan.textContent);
-
-                if (action === 'increase') {
-                    quantity++;
-                } else if (action === 'decrease' && quantity > 1) {
-                    quantity--;
-                }
-
-                quantitySpan.textContent = quantity;
-                updateCartTotal();
-                updateCartQuantity(productId, quantity);
-            });
-        });
-
-        function updateCartTotal() {
-            let total = 0;
-            document.querySelectorAll('.cart-item').forEach(item => {
-                const price = parseFloat(item.querySelector('p').textContent.replace('Price: $', ''));
-                const quantity = parseInt(item.querySelector('.quantity-controls span').textContent);
-                total += price * quantity;
-            });
-            document.getElementById('cart-total').textContent = total.toFixed(2);
-        }
-
-        function updateCartQuantity(productId, quantity) {
-            fetch('/cart/update', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ productId, quantity })
-            });
-        }
-    </script>
-
-    <script>
-        document.querySelectorAll('.remove-form').forEach(form => {
-            form.addEventListener('submit', function (event) {
-                const confirmed = confirm('Are you sure you want to remove this item from your cart?');
-                if (!confirmed) {
-                    event.preventDefault();
-                }
-            });
-        });
-    </script>
+    <%- include('partials/cart-counter') %>
 
     <%- include('partials/footer') %>
     
