@@ -6,10 +6,10 @@ const {
 const { protect } = require("../controllers/authController");
 const router = express.Router();
 
-// Route to get all products, protected by authentication
+// Get all products, (authenticated)
 router.get("/", protect, getProducts);
 
-// Route to get a specific product by ID, also protected by authentication if needed
+// Get a specific product by ID, (authenticated)
 router.get("/:id", protect, getProductById);
 
 module.exports = router;

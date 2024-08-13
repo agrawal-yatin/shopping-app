@@ -1,6 +1,6 @@
 const Cart = require("../models/Cart");
 
-let wss; // WebSocket server reference
+let wss;
 
 // WebSocket server instance
 exports.setWebSocketServer = (wsServer) => {
@@ -18,6 +18,7 @@ const notifyClients = (cart) => {
   }
 };
 
+// Fetch and render the user's cart
 exports.getCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.user._id }).populate(
@@ -32,6 +33,7 @@ exports.getCart = async (req, res) => {
   }
 };
 
+// Add a product to the user's cart
 exports.addToCart = async (req, res) => {
   const { productId } = req.body;
   try {
@@ -62,6 +64,7 @@ exports.addToCart = async (req, res) => {
   }
 };
 
+// Update the quantity of a product in the user's cart
 exports.updateCart = async (req, res) => {
   const { productId, quantity } = req.body;
   try {
@@ -83,6 +86,7 @@ exports.updateCart = async (req, res) => {
   }
 };
 
+// Remove a product from the user's cart 
 exports.removeFromCart = async (req, res) => {
   const { productId } = req.body;
   try {
@@ -101,6 +105,7 @@ exports.removeFromCart = async (req, res) => {
   }
 };
 
+// Get the total count of cart items
 exports.getCartCount = async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.user._id });

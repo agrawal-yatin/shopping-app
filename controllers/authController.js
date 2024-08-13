@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
-// Render the registration page
+// Render registration page
 exports.renderRegisterPage = (req, res) => {
   res.render("register", { title: "Register", user: req.session.user });
 };
@@ -25,7 +25,7 @@ exports.register = async (req, res) => {
   }
 };
 
-// Render the login page
+// Render login page
 exports.renderLoginPage = (req, res) => {
   res.render("login", { title: "Login", user: req.session.user });
 };
