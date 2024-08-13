@@ -84,7 +84,7 @@ This shopping application allows users to browse product listing with detailed i
    - **Remove Item:** `POST /cart/:itemId` - Remove an item from the cart.
    - **Total Price:** The total price updates live with changes in quantity or cart contents.
 
-## File and Folder Structure
+## Files and Folder Structure
 
 shopping-app/
 ├── config/
