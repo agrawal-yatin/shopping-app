@@ -11195,3 +11195,15 @@ fieldset:disabled .btn {
 .form-container .text-center a:hover {
   text-decoration: underline;
 }
+
+.preview {
+  max-width: 55%;
+}
+
+a.thumbnails {
+    padding: 10px;
+}
+
+a.thumbnails img.card-img-top {
+    height: 300px;
+}
