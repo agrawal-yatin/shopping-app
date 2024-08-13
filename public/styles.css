@@ -11207,3 +11207,38 @@ a.thumbnails {
 a.thumbnails img.card-img-top {
     height: 300px;
 }
+.mt-top-60 {
+  margin-top: 60px;
+}
+.quantity-controls {
+  align-items: center;
+    display: flex;
+}
+
+.quantity-controls i::before {
+    font-weight: 700 !important;
+}
+
+.product-cart h5 {
+    width: 50%;
+}
+
+.product-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .footer-blur {
+    --bs-bg-opacity: 0.75;
+    backdrop-filter: blur(10px);
+}
+
+.navbar-style {
+  --bs-bg-opacity: 0.75;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 2555, 0.85) !important;
+    box-shadow: 1px 1px 5px #d7d7d7;
+}

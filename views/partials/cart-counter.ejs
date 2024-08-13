@@ -23,7 +23,7 @@
     function updateCartTotal() {
         let total = 0;
         document.querySelectorAll('.cart-item').forEach(item => {
-            const price = parseFloat(item.querySelector('p').textContent.replace('Price: $', ''));
+            const price = parseFloat(item.querySelector('p').textContent.replace('$', ''));
             const quantity = parseInt(item.querySelector('.quantity-controls span').textContent);
             total += price * quantity;
         });

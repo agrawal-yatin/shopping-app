@@ -1,11 +1,11 @@
 
     <%- include('partials/header', { showHomeLink: false, showProductsLink: !!user, showCartLink: !!user, showLoginLink: !user, showRegisterLink: !user, user: user }) %>
 <!-- Header-->
-<header class="bg-dark py-5">
+<header class="bg-dark py-5 mt-top-60">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Welcome</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Browse our products and manage your cart.</p>
+            <h1 class="display-4 fw-bolder">Welcome to ShopNest</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Your destination for fantastic products and effortless cart management!</p>
         </div>
     </div>
 </header>
@@ -17,7 +17,7 @@
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <% products.forEach(product=> { %>
                     <div class="col mb-5">
-                        <div class="card h-100">
+                        <div class="card h-100 shadow-sm product-card">
                             <!-- Link to product detail page -->
                             <a class="thumbnails" href="/products/<%= product._id %>">
                                 <img class="card-img-top" src="<%= product.image %>" alt="<%= product.name %>"

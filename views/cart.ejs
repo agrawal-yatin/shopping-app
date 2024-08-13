@@ -10,7 +10,8 @@
 
         .cart-items {
             overflow: scroll;
-    max-height: calc(100vh - 220px);
+    max-height: calc(100vh - 240px);
+    padding-right: 15px;
         }
         .mt-100 {
             margin-top: 100px;
@@ -32,27 +33,29 @@
                                                 style="width: 120px; height: auto;">
                                         </a>
                                     <div class="w-100">
-                                        <div class="d-flex justify-content-between">
+                                        <div class="d-flex justify-content-between product-cart align-items-center">
                                             <h5 class="ml-2">
                                                 <a class="product-name" style="text-decoration: none !important; color: inherit !important;"
                                                     href="/products/<%= item.product._id %>">
                                                     <%= item.product.name %>
                                                 </a>
                                             </h5>
-                                            <p class="mb-2">Price: $<%= item.product.price %>
-                                            </p>
 
                                             <div class="quantity-controls">
-                                                <button class="btn btn-outline-secondary btn-sm" data-action="decrease" data-id="<%= item.product._id %>">-</button>
-                                                <span id="quantity-<%= item.product._id %>" class="mx-2">
+                                                <button class="btn btn-outline-dark btn-sm fw-bold" data-action="decrease" data-id="<%= item.product._id %>"><i class="bi-dash"></i></button>
+                                                <span id="quantity-<%= item.product._id %>" class="mx-2 small fw-bold">
                                                     <%= item.quantity %>
                                                 </span>
-                                                <button class="btn btn-outline-secondary btn-sm" data-action="increase" data-id="<%= item.product._id %>">+</button>
+                                                <button class="btn btn-outline-dark btn-sm fw-bold" data-action="increase" data-id="<%= item.product._id %>"><i class="bi-plus"></i></button>
                                             </div>
                                             <form class="remove-form" action="/cart/remove" method="POST">
                                                 <input type="hidden" name="productId" value="<%= item.product._id %>">
                                                 <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
                                             </form>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <p class="mb-2"> $<%= item.product.price %>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -67,12 +70,12 @@
                 <div class="col-md-4 bg-light p-4 rounded">
                     <div class="">
                         <h4 class="border-bottom mb-3 pb-3">Cart Summary</h4>
-                        <div class="d-flex justify-content-between mb-5">
-                            <strong>ITEMS</strong>
+                        <div class="d-flex flex-column border-bottom pb-3 justify-content-between mb-5">
+                            <h5>Total Cart Items</h5>
                             <span id="cart-count">0</span>
                         </div>
-                        <div class="d-flex justify-content-between mb-5">
-                            <strong>CART TOTAL</strong>
+                        <div class="d-flex flex-column border-bottom pb-3 justify-content-between mb-5">
+                            <h5>Cart Total</h5>
                             <% if (cart?.products?.length> 0) { %>
                             <h5>$<span id="cart-total">
                                     <%= (cart.products.reduce((total, item)=> total + (item.product.price * item.quantity), 0)).toFixed(2) %>

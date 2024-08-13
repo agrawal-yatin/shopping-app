@@ -23,6 +23,7 @@ const products = [
     description:
       "Perfect pack for everyday use and walks in the forest. Padded sleeve fits laptops up to 15 inches.",
     image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+    sku: "SKU: BST-23345",
   },
   {
     name: "Mens Casual Slim Fit T-Shirt",
@@ -31,6 +32,7 @@ const products = [
       "Slim fit, contrast raglan sleeves, lightweight fabric, three-button henley placket.",
     image:
       "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+    sku: "SKU: BST-67890",
   },
   {
     name: "Mens Cotton Jacket",
@@ -38,12 +40,14 @@ const products = [
     description:
       "Great for Spring/Autumn/Winter. Suitable for work, hiking, and outdoors. A good gift choice.",
     image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+    sku: "SKU: BST-11223",
   },
   {
     name: "Mens Casual Slim Fit",
     price: 15.99,
     description: "Color may vary slightly. Detailed size information is below.",
     image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
+    sku: "SKU: BST-44556",
   },
   {
     name: "BIYLACLESEN Snowboard Jacket",
@@ -51,6 +55,7 @@ const products = [
     description:
       "US standard size. 100% Polyester. Detachable liner, adjustable hood, and multiple pockets.",
     image: "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg",
+    sku: "SKU: BST-78901",
   },
   {
     name: "Leather Moto Jacket",
@@ -58,6 +63,7 @@ const products = [
     description:
       "100% Polyurethane shell, faux leather. 2 front pockets, removable hood, and button details.",
     image: "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg",
+    sku: "SKU: BST-23456",
   },
   {
     name: "Rain Jacket Women Windbreaker",
@@ -65,6 +71,7 @@ const products = [
     description:
       "Lightweight raincoat with hood, adjustable waist, button and zipper closure, and side pockets.",
     image: "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg",
+    sku: "SKU: BST-34567",
   },
   {
     name: "MBJ Short Sleeve V-Neck",
@@ -72,6 +79,7 @@ const products = [
     description:
       "95% Rayon, 5% Spandex. Lightweight fabric with great stretch, ribbed sleeves and neckline.",
     image: "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg",
+    sku: "SKU: BST-45678",
   },
   {
     name: "Short Sleeve Moisture Tee",
@@ -79,6 +87,7 @@ const products = [
     description:
       "100% Polyester. Lightweight, breathable, moisture-wicking fabric, V-neck collar.",
     image: "https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg",
+    sku: "SKU: BST-56789",
   },
   {
     name: "DANVOUY Casual Cotton T-Shirt",
@@ -86,8 +95,10 @@ const products = [
     description:
       "95% Cotton, 5% Spandex. Casual, short sleeve, letter print, V-neck, suitable for various occasions.",
     image: "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
+    sku: "SKU: BST-67891",
   },
 ];
+;
 ;
 
 // Function to add products to the database
