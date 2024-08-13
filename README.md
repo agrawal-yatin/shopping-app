@@ -47,10 +47,17 @@ This shopping cart application allows users to add items to their cart, update i
 
 ## Steps to Running the Application Locally
 
-1. **Start the Server**
+1. **Set Up Environment Variables**
+
+   - Create a .env file in the root directory of the project and add the following content:
+
+      MONGO_URI=mongodb://localhost:27017
+      PORT=3000
+
+2. **Start the Server**
     - npm start
 
-2.	**Open the Application**
+3.	**Open the Application**
     - Open your browser and navigate to http://localhost:3000 to access the Shopping application.
 
 ## Usage
