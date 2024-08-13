@@ -1,19 +1,22 @@
     <%- include('partials/header', { showHomeLink: false, showProductsLink: false, showCartLink: false, showLoginLink: true, showRegisterLink: false, user: user }) %>
     <main class="d-flex align-items-center justify-content-center min-vh-100">
-        <div class="form-container bg-white p-4 p-md-5 rounded shadow-sm">
-            <h2 class="text-center mb-4">Register</h2>
+        <div class="form-container login-container bg-white p-4 p-md-5 rounded shadow-sm position-relative overflow-visible">
+                <div class="icon-container d-flex align-items-center justify-content-center">
+                    <i class="bi-shop-window"></i>
+                </div>
+            <h3 class="text-center mb-4 mt-4">Register</h3>
             <!-- Registration form -->
             <form action="/auth/register" method="POST">
-                <div class="form-group">
+                <div class="form-group md-4">
                     <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                 </div>
-                <button type="submit" class="btn btn-dark btn-block w-100">Register</button>
+                <button type="submit" class="btn btn-dark btn-block w-100 mt-4">Register</button>
             </form>
         </div>
     </main>
@@ -21,6 +24,6 @@
 
 <style>
     body {
-        background-color: #e2e2e2;
+        background-color: #d5d5d5;
     }
 </style>
