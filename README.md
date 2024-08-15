@@ -135,4 +135,4 @@ Error responses include a JSON body with a message describing the error.
 
 ## Contact
 
-For any questions or feedback, please contact [yatin.agrawal@nagarro.com](mailto:yatin.agrawal@nagarro.com).
+For any questions or feedback, please contact [yatin_agrawal@live.com](mailto:yatin_agrawal@live.com).
